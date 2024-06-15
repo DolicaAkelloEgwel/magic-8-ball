@@ -1,6 +1,6 @@
 [app]
 # The name of your app as displayed in the menu
-name = "Demo App"
+name = "Magic 8 Ball"
 
 # The submenu where your app should appear.
 # One of: "Badge", "Music", "Media", "Apps", "Games"
@@ -22,7 +22,7 @@ category = "Badge"
 
 [metadata]
 # Your nickname.  Must be at most 32 characters!
-author = "hughrawlinson"
+author = "DolicaAkelloEgwel"
 
 # License of your app as an SPDX identifier: <https://spdx.org/licenses/>
 license = "LGPL-3.0-only"
