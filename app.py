@@ -39,16 +39,18 @@ class Magic8Ball(App):
         self.current_response = ""
 
     def recently_shaken(self):
-        return time.time() - self.last_shaken < 20
+        return time.time() - self.last_shaken < 10
 
     def update(self, delta):
         if self.button_states.get(BUTTON_TYPES["CANCEL"]):
             self.button_states.clear()
             self.last_shaken = 0
+            self.current_response = ""
             self.minimise()
         if st.imu.is_shaken() and not self.recently_shaken():
             self.current_response = responses[randint(0, 20)]
             self.last_shaken = time.time()
+            time.sleep(0.5)
 
     def _draw_triangle(self, ctx):
         ctx.rgb(0, 0, 1)
@@ -61,15 +63,17 @@ class Magic8Ball(App):
 
     def draw(self, ctx):
         clear_background(ctx)
-        ctx.font_size = 18
-        ctx.rgb(0, 0, 0).rectangle(-120, -120, 240, 240).fill()
         ctx.text_align = ctx.CENTER
         ctx.text_baseline = ctx.MIDDLE
-        if self.recently_shaken():
+        if self.recently_shaken() and self.current_response:
+            ctx.font_size = 20
+            ctx.gray(0.0).rectangle(-120, -120, 240, 240).fill()
             self._draw_triangle(ctx)
             ctx.move_to(0, 0).gray(1).text(self.current_response)
         else:
-            ctx.move_to(0, 0).gray(1).text("Hello, world!")
+            ctx.font_size = 140
+            ctx.gray(1.0).rectangle(-120, -120, 240, 240).fill()
+            ctx.gray(0.0).move_to(0, 5).text("8")
 
 
 __app_export__ = Magic8Ball
