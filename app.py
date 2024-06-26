@@ -6,6 +6,8 @@ import time
 from random import randint
 import math
 
+TRIANGLE_X = 60 * math.sqrt(3)
+
 responses = [
     "It is certain.",
     "It is decidedly so.",
@@ -51,14 +53,15 @@ class Magic8Ball(App):
     def _draw_triangle(self, ctx):
         ctx.rgb(0, 0, 1)
         ctx.begin_path()
-        ctx.move_to(-60 * math.sqrt(3), -60)
-        ctx.line_to(60 * math.sqrt(3), -60)
+        ctx.move_to(-TRIANGLE_X, -60)
+        ctx.line_to(TRIANGLE_X, -60)
         ctx.line_to(0, 120)
         ctx.close_path()
         ctx.fill()
 
     def draw(self, ctx):
         clear_background(ctx)
+        ctx.font_size = 18
         ctx.rgb(0, 0, 0).rectangle(-120, -120, 240, 240).fill()
         ctx.text_align = ctx.CENTER
         ctx.text_baseline = ctx.MIDDLE
