@@ -4,6 +4,7 @@ import simple_tildagon as st
 from events.input import Buttons, BUTTON_TYPES
 import time
 from random import randint
+import math
 
 responses = [
     "It is certain.",
@@ -47,8 +48,14 @@ class Magic8Ball(App):
             self.current_response = responses[randint(0, 20)]
             self.last_shaken = time.time()
 
-    def _draw_response(self, ctx):
-        pass
+    def _draw_triangle(self, ctx):
+        ctx.rgb(0, 0, 1)
+        ctx.begin_path()
+        ctx.move_to(-60 * math.sqrt(3), -60)
+        ctx.line_to(60 * math.sqrt(3), -60)
+        ctx.line_to(0, 120)
+        ctx.close_path()
+        ctx.fill()
 
     def draw(self, ctx):
         clear_background(ctx)
@@ -56,6 +63,7 @@ class Magic8Ball(App):
         ctx.text_align = ctx.CENTER
         ctx.text_baseline = ctx.MIDDLE
         if self.recently_shaken():
+            self._draw_triangle(ctx)
             ctx.move_to(0, 0).gray(1).text(self.current_response)
         else:
             ctx.move_to(0, 0).gray(1).text("Hello, world!")
