@@ -43,7 +43,8 @@ class Magic8Ball(App):
             self.button_states.clear()
             self.last_shaken = 0
             self.minimise()
-        if st.imu.is_shaken():
+        if st.imu.is_shaken() and not self.recently_shaken():
+            self.current_response = responses[randint(0, 20)]
             self.last_shaken = time.time()
 
     def _draw_response(self, ctx):
@@ -55,7 +56,7 @@ class Magic8Ball(App):
         ctx.text_align = ctx.CENTER
         ctx.text_baseline = ctx.MIDDLE
         if self.recently_shaken():
-            ctx.move_to(0, 0).gray(1).text("Shaken...")
+            ctx.move_to(0, 0).gray(1).text(self.current_response)
         else:
             ctx.move_to(0, 0).gray(1).text("Hello, world!")
 
