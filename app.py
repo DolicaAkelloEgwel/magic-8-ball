@@ -4,9 +4,9 @@ import simple_tildagon as st
 from events.input import Buttons, BUTTON_TYPES
 import time
 from random import randint
-import math
+from math import sqrt
 
-TRIANGLE_X = 60 * math.sqrt(3)
+TRIANGLE_X = 60 * sqrt(3)
 
 RESPONSES = [
     "It is certain.",
