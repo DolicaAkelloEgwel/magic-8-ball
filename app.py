@@ -8,7 +8,7 @@ import math
 
 TRIANGLE_X = 60 * math.sqrt(3)
 
-responses = [
+RESPONSES = [
     "It is certain.",
     "It is decidedly so.",
     "Without a doubt.",
@@ -47,8 +47,9 @@ class Magic8Ball(App):
             self.last_shaken = 0
             self.current_response = ""
             self.minimise()
+
         if st.imu.is_shaken() and not self.recently_shaken():
-            self.current_response = responses[randint(0, 20)]
+            self.current_response = RESPONSES[randint(0, len(RESPONSES) - 1)]
             self.last_shaken = time.time()
             time.sleep(0.5)
 
@@ -65,6 +66,7 @@ class Magic8Ball(App):
         clear_background(ctx)
         ctx.text_align = ctx.CENTER
         ctx.text_baseline = ctx.MIDDLE
+
         if self.recently_shaken() and self.current_response:
             ctx.font_size = 20
             ctx.gray(0.0).rectangle(-120, -120, 240, 240).fill()
